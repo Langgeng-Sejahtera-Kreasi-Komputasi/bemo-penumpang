@@ -30,7 +30,9 @@
         #app-container {
             max-width: 480px;
             margin: auto;
-            height: 100vh;
+            /* Perbaikan untuk tinggi viewport di mobile */
+            height: 100vh; /* Fallback */
+            height: var(--app-height, 100vh); /* Menggunakan variabel custom */
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -147,7 +149,7 @@
                 <img src="https://placehold.co/48x48/E2E8F0/475569?text=P" alt="Avatar Pengguna" class="w-12 h-12 rounded-full">
             </header>
 
-            <main class="flex-grow p-4 overflow-y-auto">
+            <main class="flex-grow px-4 pt-4 pb-24 overflow-y-auto">
                 <div class="mt-4">
                     <h2 class="text-lg font-semibold text-slate-700 mb-4">Pilih Layanan</h2>
                     <div id="service-grid" class="grid grid-cols-3 gap-4 text-center">
@@ -174,9 +176,9 @@
             </header>
             <div class="flex-grow relative">
                 <div id="map-view" class="h-full w-full z-10"></div>
-                <div id="map-bottom-sheet" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl z-20 flex flex-col" style="transform: translateY(calc(100% - 220px)); max-height: 85vh;">
+                <div id="map-bottom-sheet" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl z-20 flex flex-col" style="transform: translateY(calc(100% - 240px)); max-height: 85vh;">
                      <div id="sheet-handle" class="w-10 h-1 bg-slate-300 rounded-full mx-auto my-3 cursor-grab flex-shrink-0" aria-label="Geser untuk membuka detail"></div>
-                     <div class="px-4 pb-4 overflow-y-auto">
+                     <div class="px-4 pb-24 overflow-y-auto">
                          <div class="flex items-center mb-4">
                              <i id="sheet-icon" class="fas fa-bus text-2xl text-blue-500 mr-3" aria-hidden="true"></i>
                              <h2 id="sheet-title" class="text-lg font-bold text-slate-800">Detail Rute</h2>
@@ -200,8 +202,8 @@
                 <button class="back-btn text-slate-600 mr-4" data-target="map-screen" aria-label="Kembali ke peta"><i class="fas fa-arrow-left text-xl"></i></button>
                 <h1 id="payment-screen-title" class="text-xl font-bold text-slate-800">Pembayaran</h1>
             </header>
-            <main class="flex-grow flex flex-col justify-center items-center p-6 text-center">
-                <p class="text-slate-600">Pindai Kode QRIS ini untuk membayar</p>
+            <main class="flex-grow flex flex-col items-center px-6 pt-6 pb-24 text-center overflow-y-auto">
+                <p class="text-slate-600 mt-4">Pindai Kode QRIS ini untuk membayar</p>
                 <div id="payment-qrcode" class="my-6 p-4 border rounded-lg bg-white"></div>
                 <div class="text-lg">
                     <p class="text-slate-500">Total Pembayaran</p>
@@ -217,12 +219,12 @@
                 <h1 id="ticket-screen-title" class="text-xl font-bold text-slate-800">E-Tiket Anda</h1>
                 <button class="done-btn text-blue-600 font-semibold" aria-label="Selesai dan kembali ke beranda">Selesai</button>
             </header>
-            <main class="flex-grow flex flex-col items-center p-6 space-y-6 overflow-y-auto">
-                <div id="ticket-details" class="bg-white w-full max-w-sm rounded-xl shadow-lg">
+            <main class="flex-grow flex flex-col items-center px-6 pt-6 pb-24 space-y-6 overflow-y-auto">
+                <div id="ticket-details" class="bg-white w-full max-w-sm rounded-xl shadow-lg flex-shrink-0">
                     </div>
-                <div id="charter-simulation-controls" class="w-full max-w-sm"></div>
+                <div id="charter-simulation-controls" class="w-full max-w-sm flex-shrink-0"></div>
                 
-                <button id="download-ticket-btn" class="w-full max-w-sm bg-slate-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-slate-800">
+                <button id="download-ticket-btn" class="w-full max-w-sm bg-slate-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-slate-800 flex-shrink-0">
                     <i class="fas fa-download" aria-hidden="true"></i>
                     <span>Unduh Tiket</span>
                 </button>
@@ -234,7 +236,7 @@
                  <button class="back-btn text-slate-600 mr-4" data-target="home-screen" aria-label="Kembali ke beranda"><i class="fas fa-arrow-left text-xl"></i></button>
                 <h1 class="text-xl font-bold text-slate-800">Riwayat Pesanan</h1>
             </header>
-            <main id="history-list-container" class="flex-grow p-4 overflow-y-auto space-y-3">
+            <main id="history-list-container" class="flex-grow px-4 pt-4 pb-24 overflow-y-auto space-y-3">
                 </main>
         </section>
 
@@ -243,7 +245,7 @@
                 <button class="back-btn text-slate-600 mr-4" data-target="home-screen" aria-label="Kembali ke beranda"><i class="fas fa-arrow-left text-xl"></i></button>
                 <h1 class="text-xl font-bold text-slate-800">Sewa Kendaraan</h1>
             </header>
-            <main class="flex-grow p-4 overflow-y-auto space-y-4">
+            <main class="flex-grow px-4 pt-4 pb-24 overflow-y-auto space-y-4">
                 <div class="bg-white p-4 rounded-lg shadow-sm">
                     <div>
                         <label for="charter-service-select" class="block text-sm font-medium text-slate-700">Jenis Kendaraan</label>
@@ -327,11 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
         currentScreen: null,
         previousScreen: null,
         currentService: null,
-        currentOrderForPayment: null, // Digunakan untuk membedakan pembayaran reguler vs charter
+        currentOrderForPayment: null, 
         map: null,
         charterMap: null,
         charterOrder: {},
-        charterLocationType: null, // 'pickup' or 'dropoff'
+        charterLocationType: null,
     };
 
     // --- Data Tiruan ---
@@ -389,6 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const formatCurrency = (amount) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
     const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+    // --- Perbaikan Tinggi Aplikasi di Seluler ---
+    const setAppHeight = () => {
+        const doc = document.documentElement;
+        doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
 
     // --- Navigation Logic ---
     const navigateTo = (screenId, data = {}) => {
@@ -470,7 +478,6 @@ document.addEventListener('DOMContentLoaded', () => {
              qrContainer.innerHTML = '';
              new QRCode(qrContainer, { text: `BEMO-PAY;${Date.now()};${fare}`, width: 200, height: 200 });
 
-             // Set back button target correctly
              const backBtn = dom.paymentScreen.querySelector('.back-btn');
              backBtn.dataset.target = isCharterPayment ? 'history-screen' : 'map-screen';
              document.getElementById('payment-screen-title').textContent = isCharterPayment ? 'Pembayaran Charter' : 'Pembayaran';
@@ -514,13 +521,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             dom.ticketDetails.innerHTML = ticketHTML;
             
-            // Generate ticket QR code
             new QRCode(document.getElementById('ticket-qrcode-container'), {
                 text: `BEMO-TICKET;${id};${routeName || serviceName};${fare}`,
                 width: 220, height: 220
             });
             
-            // Add charter simulation controls
             if (isCharter) {
                  renderCharterSimulationControls(data);
             }
@@ -716,6 +721,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners Setup ---
     const setupEventListeners = () => {
+        window.addEventListener('resize', setAppHeight);
+
         dom.appContainer.addEventListener('click', async (e) => {
             const target = e.target;
             const closest = (selector) => target.closest(selector);
@@ -756,7 +763,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Specific Buttons
             switch(target.id) {
                 case 'order-ticket-btn':
-                    appState.currentOrderForPayment = null; // Pastikan ini pembayaran reguler
+                    appState.currentOrderForPayment = null; 
                     navigateTo('payment-screen');
                     break;
                 case 'charter-entry-btn':
@@ -788,7 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'request-charter-btn':
                     {
-                        saveCharterFormState(); // Save latest state before submitting
+                        saveCharterFormState();
                         const { serviceName, pax, date, time, pickup, dropoff } = appState.charterOrder;
                         if (!serviceName || !pax || !date || !time || !pickup || !dropoff) {
                             showToast("Harap lengkapi semua data charter.");
@@ -805,7 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ...appState.charterOrder,
                             date: new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
                             status: 'Menunggu Konfirmasi',
-                            fare: 0, // Harga akan ditentukan oleh admin
+                            fare: 0, 
                             driver: "Menunggu Penugasan",
                             vehicle: "Menunggu Penugasan",
                         };
@@ -819,7 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              const order = historyData.find(c => c.id === newCharterId);
                              if(order) {
                                 order.status = 'Menunggu Pembayaran';
-                                order.fare = (Math.floor(Math.random() * (150 - 50 + 1)) + 50) * 10000; // Harga acak antara 500rb - 1.5jt
+                                order.fare = (Math.floor(Math.random() * (150 - 50 + 1)) + 50) * 10000;
                                 if(appState.currentScreen === 'history-screen') {
                                     renderHistoryList();
                                 }
@@ -853,36 +860,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         await delay(1500); 
 
-                        // Cek apakah ini pembayaran charter atau reguler
                         if (appState.currentOrderForPayment) {
-                            // Ini adalah pembayaran charter
                             const order = historyData.find(item => item.id === appState.currentOrderForPayment.id);
                             if (order) {
                                 showToast("Pembayaran charter berhasil!", 2000);
                                 order.status = 'Dikonfirmasi';
 
-                                // --- Simulasi Admin Memberi Info Driver ---
                                 setTimeout(() => {
                                     order.driver = "Ujang Supriadi";
                                     order.vehicle = `Hiace D ${Math.floor(1000 + Math.random() * 9000)} UJP`;
                                     showToast("Info driver & kendaraan diterima.", 2000);
                                      if(appState.currentScreen === 'history-screen') renderHistoryList();
 
-                                    // --- Simulasi Driver Menjemput (2 menit -> diubah jadi 10 detik untuk demo) ---
                                     setTimeout(() => {
-                                        if (order.status === 'Dikonfirmasi') { // Hanya jalan jika status belum berubah
+                                        if (order.status === 'Dikonfirmasi') {
                                             order.status = 'Driver Menuju Lokasi';
                                             showToast("Driver sedang dalam perjalanan menjemput Anda!", 4000);
                                             if(appState.currentScreen === 'history-screen') renderHistoryList();
-                                            if(appState.currentScreen === 'ticket-screen') navigateTo('ticket-screen', order); // Refresh ticket screen if open
+                                            if(appState.currentScreen === 'ticket-screen') navigateTo('ticket-screen', order);
                                         }
-                                    }, 10000); // 120000 ms = 2 menit
+                                    }, 10000); 
                                 }, 2000);
                             }
                             navigateTo('history-screen');
-                            appState.currentOrderForPayment = null; // Reset
+                            appState.currentOrderForPayment = null; 
                         } else {
-                            // Ini pembayaran reguler
                             const selectedRouteEl = dom.routeSelect;
                             const routeName = selectedRouteEl.options[selectedRouteEl.selectedIndex].text;
                             const newHistoryItem = {
@@ -908,7 +910,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (order) {
                         order.status = 'Dalam Perjalanan';
                         showToast("Penjemputan berhasil. Selamat menikmati perjalanan!");
-                        navigateTo('ticket-screen', order); // Refresh ticket view
+                        navigateTo('ticket-screen', order); 
                         if (appState.previousScreen === 'history-screen') {
                            renderHistoryList();
                         }
@@ -921,7 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (order) {
                         order.status = 'Selesai';
                         showToast("Perjalanan telah selesai. Terima kasih!");
-                        navigateTo('ticket-screen', order); // Refresh ticket view
+                        navigateTo('ticket-screen', order); 
                         setTimeout(() => navigateTo('history-screen'), 2000);
                     }
                     break;
@@ -933,6 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Main Initializer ---
     const init = () => {
         showLoading(true);
+        setAppHeight(); // Atur tinggi aplikasi saat pertama kali dimuat
         setupEventListeners();
         navigateTo('home-screen');
         showLoading(false);

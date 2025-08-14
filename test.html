@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BEMO Mobile</title>
 
-    <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,9 +137,7 @@
 
 <div id="app-container">
 
-    <!-- Kontainer utama untuk semua layar, akan mengisi ruang yang tersedia -->
     <main class="relative flex-1 overflow-hidden">
-        <!-- =========== 1. Layar Beranda (Dasbor) =========== -->
         <section id="home-screen" class="app-screen">
             <header class="p-4 flex justify-between items-center bg-white shadow-sm flex-shrink-0">
                 <div>
@@ -154,8 +151,7 @@
                 <div class="mt-4">
                     <h2 class="text-lg font-semibold text-slate-700 mb-4">Pilih Layanan</h2>
                     <div id="service-grid" class="grid grid-cols-3 gap-4 text-center">
-                        <!-- Layanan akan di-render oleh JavaScript -->
-                    </div>
+                        </div>
                 </div>
                 
                 <div class="mt-8">
@@ -171,7 +167,6 @@
             </main>
         </section>
 
-        <!-- =========== 2. Layar Peta =========== -->
         <section id="map-screen" class="app-screen">
             <header class="p-4 flex items-center bg-white shadow-sm z-20 flex-shrink-0">
                 <button class="back-btn text-slate-600 mr-4" data-target="home-screen" aria-label="Kembali ke beranda"><i class="fas fa-arrow-left text-xl"></i></button>
@@ -182,43 +177,41 @@
                 <div id="map-bottom-sheet" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl z-20 flex flex-col" style="transform: translateY(calc(100% - 220px)); max-height: 85vh;">
                      <div id="sheet-handle" class="w-10 h-1 bg-slate-300 rounded-full mx-auto my-3 cursor-grab flex-shrink-0" aria-label="Geser untuk membuka detail"></div>
                      <div class="px-4 pb-4 overflow-y-auto">
-                        <div class="flex items-center mb-4">
-                            <i id="sheet-icon" class="fas fa-bus text-2xl text-blue-500 mr-3" aria-hidden="true"></i>
-                            <h2 id="sheet-title" class="text-lg font-bold text-slate-800">Detail Rute</h2>
-                        </div>
-                        <div>
-                            <label for="route-select" class="text-sm font-medium text-slate-600">Pilih Rute Anda</label>
-                            <select id="route-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"></select>
-                        </div>
-                        <div class="mt-4 text-sm text-slate-600">
-                            <p>Estimasi kendaraan terdekat: <span id="nearest-vehicle" class="font-semibold text-slate-800">5 menit</span></p>
-                            <p id="fare-info">Tarif: <span id="route-fare" class="font-semibold text-slate-800">Rp 5.000</span></p>
-                        </div>
-                        <button id="order-ticket-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mt-4 hover:bg-blue-700 transition-colors">Pesan Tiket</button>
+                         <div class="flex items-center mb-4">
+                             <i id="sheet-icon" class="fas fa-bus text-2xl text-blue-500 mr-3" aria-hidden="true"></i>
+                             <h2 id="sheet-title" class="text-lg font-bold text-slate-800">Detail Rute</h2>
+                         </div>
+                         <div>
+                             <label for="route-select" class="text-sm font-medium text-slate-600">Pilih Rute Anda</label>
+                             <select id="route-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"></select>
+                         </div>
+                         <div class="mt-4 text-sm text-slate-600">
+                             <p>Estimasi kendaraan terdekat: <span id="nearest-vehicle" class="font-semibold text-slate-800">5 menit</span></p>
+                             <p id="fare-info">Tarif: <span id="route-fare" class="font-semibold text-slate-800">Rp 5.000</span></p>
+                         </div>
+                         <button id="order-ticket-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mt-4 hover:bg-blue-700 transition-colors">Pesan Tiket</button>
                      </div>
                 </div>
             </div>
         </section>
 
-        <!-- =========== 3. Layar Pembayaran =========== -->
         <section id="payment-screen" class="app-screen bg-white">
             <header class="p-4 flex items-center bg-white shadow-sm flex-shrink-0">
                 <button class="back-btn text-slate-600 mr-4" data-target="map-screen" aria-label="Kembali ke peta"><i class="fas fa-arrow-left text-xl"></i></button>
-                <h1 class="text-xl font-bold text-slate-800">Pembayaran</h1>
+                <h1 id="payment-screen-title" class="text-xl font-bold text-slate-800">Pembayaran</h1>
             </header>
             <main class="flex-grow flex flex-col justify-center items-center p-6 text-center">
-                <p class="text-slate-600">Pindai Kode QR ini untuk membayar</p>
+                <p class="text-slate-600">Pindai Kode QRIS ini untuk membayar</p>
                 <div id="payment-qrcode" class="my-6 p-4 border rounded-lg bg-white"></div>
                 <div class="text-lg">
                     <p class="text-slate-500">Total Pembayaran</p>
-                    <p id="payment-amount" class="text-3xl font-bold text-blue-600">Rp 5.000</p>
+                    <p id="payment-amount" class="text-3xl font-bold text-blue-600">Rp 0</p>
                 </div>
                 <p class="text-xs text-slate-400 mt-4">Pesanan akan batal dalam <span id="payment-timer">5:00</span></p>
                 <button id="confirm-payment-btn" class="w-full max-w-sm bg-green-500 text-white font-bold py-3 px-4 rounded-lg mt-8 hover:bg-green-600 transition-colors">Saya Sudah Bayar</button>
             </main>
         </section>
 
-        <!-- =========== 4. Layar E-Tiket =========== -->
         <section id="ticket-screen" class="app-screen">
             <header class="p-4 flex items-center justify-between bg-white shadow-sm flex-shrink-0">
                 <h1 id="ticket-screen-title" class="text-xl font-bold text-slate-800">E-Tiket Anda</h1>
@@ -226,8 +219,9 @@
             </header>
             <main class="flex-grow flex flex-col items-center p-6 space-y-6 overflow-y-auto">
                 <div id="ticket-details" class="bg-white w-full max-w-sm rounded-xl shadow-lg">
-                    <!-- Konten tiket di sini -->
-                </div>
+                    </div>
+                <div id="charter-simulation-controls" class="w-full max-w-sm"></div>
+                
                 <button id="download-ticket-btn" class="w-full max-w-sm bg-slate-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-slate-800">
                     <i class="fas fa-download" aria-hidden="true"></i>
                     <span>Unduh Tiket</span>
@@ -235,18 +229,15 @@
             </main>
         </section>
         
-        <!-- =========== 5. Layar Riwayat =========== -->
         <section id="history-screen" class="app-screen">
             <header class="p-4 flex items-center bg-white shadow-sm flex-shrink-0">
                  <button class="back-btn text-slate-600 mr-4" data-target="home-screen" aria-label="Kembali ke beranda"><i class="fas fa-arrow-left text-xl"></i></button>
                 <h1 class="text-xl font-bold text-slate-800">Riwayat Pesanan</h1>
             </header>
             <main id="history-list-container" class="flex-grow p-4 overflow-y-auto space-y-3">
-                <!-- Daftar riwayat akan di-render oleh JavaScript -->
-            </main>
+                </main>
         </section>
 
-        <!-- =========== 6. Layar Form Charter (BARU) =========== -->
         <section id="charter-form-screen" class="app-screen">
             <header class="p-4 flex items-center bg-white shadow-sm flex-shrink-0">
                 <button class="back-btn text-slate-600 mr-4" data-target="home-screen" aria-label="Kembali ke beranda"><i class="fas fa-arrow-left text-xl"></i></button>
@@ -289,7 +280,6 @@
             </main>
         </section>
 
-        <!-- =========== 7. Layar Peta Charter (BARU) =========== -->
         <section id="charter-map-screen" class="app-screen">
             <header class="p-4 flex items-center bg-white shadow-sm z-20 flex-shrink-0">
                 <button id="charter-map-back-btn" class="text-slate-600 mr-4"><i class="fas fa-arrow-left text-xl"></i></button>
@@ -308,13 +298,11 @@
 
     </main>
 
-    <!-- =========== UI Elements Global =========== -->
     <div id="loading-overlay" class="hidden">
         <div class="spinner"></div>
     </div>
     <div id="toast-notification"></div>
 
-    <!-- =========== Navigasi Bawah Global =========== -->
     <footer class="grid grid-cols-3 gap-4 p-2 bg-white shadow-[0_-5px_15px_-3px_rgba(0,0,0,0.1)] z-30 flex-shrink-0">
         <a href="#" class="nav-item text-center p-2 rounded-lg" data-target="home-screen" role="button" aria-label="Navigasi Beranda">
             <i class="fas fa-home text-xl"></i>
@@ -339,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentScreen: null,
         previousScreen: null,
         currentService: null,
+        currentOrderForPayment: null, // Digunakan untuk membedakan pembayaran reguler vs charter
         map: null,
         charterMap: null,
         charterOrder: {},
@@ -355,8 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     let historyData = [
+        { id: 'charter001-completed', type: 'charter', serviceName: 'Bandros', date: '14 Agu 2025', fare: 750000, status: 'Selesai', pickup: 'Stasiun Bandung', dropoff: 'Lembang Park & Zoo', driver: 'Asep Sunandar', vehicle: 'Bandros D 9012 JKW'},
         { id: 'hist001', type: 'reguler', serviceName: 'TMB', routeName: 'KBP - Cicaheum', date: '15 Agu 2025', fare: 5000, status: 'Menunggu Keberangkatan' },
-        { id: 'charter001', type: 'charter', serviceName: 'Bandros', date: '14 Agu 2025', fare: 750000, status: 'Dikonfirmasi', pickup: 'Stasiun Bandung', dropoff: 'Lembang Park & Zoo', driver: 'Asep Sunandar', vehicle: 'Bandros D 9012 JKW'},
         { id: 'hist002', type: 'reguler', serviceName: 'Bandros', routeName: 'Tur Sejarah', date: '12 Agu 2025', fare: 20000, status: 'Selesai' },
         { id: 'hist003', type: 'reguler', serviceName: 'Angkot', routeName: 'Cicaheum - Ledeng', date: '11 Agu 2025', fare: 4000, status: 'Selesai' },
         { id: 'hist004', type: 'reguler', serviceName: 'TMB', routeName: 'Cibiru - Elang', date: '10 Agu 2025', fare: 5000, status: 'Dibatalkan' },
@@ -372,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         historyListContainer: document.getElementById('history-list-container'),
         mapView: document.getElementById('map-view'),
         routeSelect: document.getElementById('route-select'),
+        paymentScreen: document.getElementById('payment-screen'),
         // Charter Form
         charterServiceSelect: document.getElementById('charter-service-select'),
         charterPax: document.getElementById('charter-pax'),
@@ -385,14 +375,17 @@ document.addEventListener('DOMContentLoaded', () => {
         charterMapTitle: document.getElementById('charter-map-title'),
         charterMapBackBtn: document.getElementById('charter-map-back-btn'),
         confirmCharterLocBtn: document.getElementById('confirm-charter-loc-btn'),
+        // Ticket Screen
+        ticketDetails: document.getElementById('ticket-details'),
+        charterSimControls: document.getElementById('charter-simulation-controls'),
     };
     
     // --- Helper Functions ---
     const showLoading = (show) => dom.loadingOverlay.classList.toggle('hidden', !show);
-    const showToast = (message) => {
+    const showToast = (message, duration = 3000) => {
         dom.toast.textContent = message;
         dom.toast.classList.add('show');
-        setTimeout(() => dom.toast.classList.remove('show'), 3000);
+        setTimeout(() => dom.toast.classList.remove('show'), duration);
     };
     const formatCurrency = (amount) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
     const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -400,7 +393,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Navigation Logic ---
     const navigateTo = (screenId, data = {}) => {
         const nextScreenEl = document.getElementById(screenId);
-        if (!nextScreenEl || screenId === appState.currentScreen) return;
+        if (!nextScreenEl || screenId === appState.currentScreen) {
+             if (typeof screenInitializers[screenId] === 'function') {
+                screenInitializers[screenId](data);
+            }
+            return;
+        };
         
         const currentScreenEl = appState.currentScreen ? document.getElementById(appState.currentScreen) : null;
 
@@ -447,6 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const service = serviceData[serviceName];
             if (!service) return navigateTo('home-screen');
             appState.currentService = service;
+            dom.paymentScreen.querySelector('.back-btn').dataset.target = 'map-screen';
 
             document.getElementById('map-title').innerText = `Peta ${service.name}`;
             const sheetIcon = document.getElementById('sheet-icon');
@@ -462,20 +461,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             initializeMap();
         },
-        'payment-screen': () => {
-             const fare = appState.currentService.fare;
+        'payment-screen': (data = {}) => {
+             const isCharterPayment = !!appState.currentOrderForPayment;
+             const fare = isCharterPayment ? appState.currentOrderForPayment.fare : appState.currentService.fare;
+             
              document.getElementById('payment-amount').innerText = formatCurrency(fare);
              const qrContainer = document.getElementById('payment-qrcode');
              qrContainer.innerHTML = '';
              new QRCode(qrContainer, { text: `BEMO-PAY;${Date.now()};${fare}`, width: 200, height: 200 });
+
+             // Set back button target correctly
+             const backBtn = dom.paymentScreen.querySelector('.back-btn');
+             backBtn.dataset.target = isCharterPayment ? 'history-screen' : 'map-screen';
+             document.getElementById('payment-screen-title').textContent = isCharterPayment ? 'Pembayaran Charter' : 'Pembayaran';
         },
         'ticket-screen': async (data) => {
-            const ticketDetailsContainer = document.getElementById('ticket-details');
-            ticketDetailsContainer.innerHTML = '';
+            dom.ticketDetails.innerHTML = '';
+            dom.charterSimControls.innerHTML = '';
             showLoading(true);
             await delay(500);
 
-            const { routeName, fare, serviceName, date, type, pickup, dropoff, driver, vehicle } = data;
+            const { id, routeName, fare, serviceName, date, type, pickup, dropoff, driver, vehicle, status } = data;
             const displayDate = date || new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric'});
             const isCharter = type === 'charter';
             
@@ -491,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="border-t border-dashed my-4"></div>
                     <div class="text-sm space-y-2">
                         <div class="flex justify-between"><span class="text-slate-500">Nama:</span><span class="font-semibold text-slate-800">Pengguna BEMO</span></div>
-                        <div class="flex justify-between"><span class="text-slate-500">${isCharter ? 'Layanan' : 'Rute'}:</span><span class="font-semibold text-slate-800">${isCharter ? serviceName : routeName}</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">${isCharter ? 'Layanan' : 'Rute'}:</span><span class="font-semibold text-slate-800 text-right">${isCharter ? serviceName : routeName}</span></div>
                         <div class="flex justify-between"><span class="text-slate-500">Tanggal:</span><span class="font-semibold text-slate-800">${displayDate}</span></div>
                         ${isCharter ? `
                         <div class="flex justify-between text-right"><span class="text-slate-500">Dari:</span><span class="font-semibold text-slate-800">${pickup}</span></div>
@@ -506,28 +512,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="text-xs text-slate-400 text-center">Tunjukkan kode QR ini kepada petugas.</p>
                 </div>
             `;
-            ticketDetailsContainer.innerHTML = ticketHTML;
+            dom.ticketDetails.innerHTML = ticketHTML;
             
+            // Generate ticket QR code
             new QRCode(document.getElementById('ticket-qrcode-container'), {
-                text: `BEMO-TICKET;${Date.now()};${routeName || serviceName};${fare}`,
+                text: `BEMO-TICKET;${id};${routeName || serviceName};${fare}`,
                 width: 220, height: 220
             });
+            
+            // Add charter simulation controls
+            if (isCharter) {
+                 renderCharterSimulationControls(data);
+            }
+
             showLoading(false);
         },
         'charter-form-screen': (data) => {
-            // Hanya isi dropdown jika belum ada isinya
             if (dom.charterServiceSelect.options.length === 0) {
                  dom.charterServiceSelect.innerHTML = Object.values(serviceData)
-                    .filter(s => !s.external)
-                    .map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+                     .filter(s => !s.external)
+                     .map(s => `<option value="${s.name}">${s.name}</option>`).join('');
             }
-            
-            // Jika ini adalah navigasi baru dari home, reset state
-            if (data.isNew) {
-                appState.charterOrder = {};
-            }
-
-            // Selalu update form dari state
+            if (data.isNew) appState.charterOrder = {};
             dom.charterServiceSelect.value = appState.charterOrder.serviceName || Object.values(serviceData).find(s => !s.external).name;
             dom.charterPax.value = appState.charterOrder.pax || '';
             dom.charterDate.value = appState.charterOrder.date || '';
@@ -570,22 +576,34 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const statusStyles = {
             'Selesai': { text: 'text-green-700', bg: 'bg-green-100' },
-            'Menunggu Keberangkatan': { text: 'text-blue-700', bg: 'bg-blue-100' },
-            'Dikonfirmasi': { text: 'text-emerald-700', bg: 'bg-emerald-100' },
+            'Menunggu Keberangkatan': { text: 'text-sky-700', bg: 'bg-sky-100' },
+            'Dikonfirmasi': { text: 'text-blue-700', bg: 'bg-blue-100' },
             'Menunggu Konfirmasi': { text: 'text-amber-700', bg: 'bg-amber-100' },
+            'Menunggu Pembayaran': { text: 'text-orange-700', bg: 'bg-orange-100' },
+            'Driver Menuju Lokasi': { text: 'text-indigo-700', bg: 'bg-indigo-100' },
+            'Dalam Perjalanan': { text: 'text-purple-700', bg: 'bg-purple-100' },
             'Dibatalkan': { text: 'text-red-700', bg: 'bg-red-100' },
             'Ditolak': { text: 'text-red-700', bg: 'bg-red-100' },
         };
 
         historyData.forEach(item => {
             const service = serviceData[item.serviceName];
+            if (!service) return;
             const style = statusStyles[item.status] || { text: 'text-slate-700', bg: 'bg-slate-100' };
             const card = document.createElement('div');
             card.className = 'bg-white p-4 rounded-lg shadow-sm';
             
             let buttonHTML = '';
-            if (item.status === 'Menunggu Keberangkatan' || item.status === 'Dikonfirmasi') {
-                buttonHTML = `<button data-history-id="${item.id}" class="view-ticket-btn mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600">Lihat Tiket</button>`;
+            switch (item.status) {
+                case 'Menunggu Pembayaran':
+                    buttonHTML = `<button data-history-id="${item.id}" class="pay-charter-btn mt-3 w-full text-center px-4 py-2 bg-orange-500 text-white text-sm font-semibold rounded-lg hover:bg-orange-600">Bayar Sekarang</button>`;
+                    break;
+                case 'Menunggu Keberangkatan':
+                case 'Dikonfirmasi':
+                case 'Driver Menuju Lokasi':
+                case 'Dalam Perjalanan':
+                    buttonHTML = `<button data-history-id="${item.id}" class="view-ticket-btn mt-3 w-full text-center px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600">Lihat Tiket</button>`;
+                    break;
             }
 
             card.innerHTML = `
@@ -602,11 +620,43 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${item.status}
                     </div>
                 </div>
+                <div class="charter-details mt-2 text-xs text-slate-500">
+                    ${(item.type === 'charter' && item.driver && item.driver !== 'Menunggu Penugasan') ? `<p>Driver: <strong>${item.driver}</strong> (${item.vehicle})</p>` : ''}
+                </div>
                 ${buttonHTML}
             `;
             dom.historyListContainer.appendChild(card);
         });
     };
+    
+    const renderCharterSimulationControls = (data) => {
+        dom.charterSimControls.innerHTML = '';
+        let content = '';
+        const statusTextClass = "text-center p-3 mb-2 rounded-lg text-sm font-medium";
+        
+        switch (data.status) {
+            case 'Dikonfirmasi':
+                content = `<div class="${statusTextClass} bg-blue-100 text-blue-800">Driver telah ditugaskan. Menunggu penjemputan sesuai jadwal.</div>`;
+                break;
+            case 'Driver Menuju Lokasi':
+                content = `
+                    <div class="${statusTextClass} bg-indigo-100 text-indigo-800">Driver sedang menuju lokasi penjemputan.</div>
+                    <button id="simulate-scan-btn" data-id="${data.id}" class="w-full bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600">[Simulasi] Driver Scan QR Penjemputan</button>
+                `;
+                break;
+            case 'Dalam Perjalanan':
+                 content = `
+                    <div class="${statusTextClass} bg-purple-100 text-purple-800">Anda sedang dalam perjalanan menuju tujuan.</div>
+                    <button id="simulate-finish-btn" data-id="${data.id}" class="w-full bg-red-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-600">[Simulasi] Driver Selesaikan Perjalanan</button>
+                `;
+                break;
+            case 'Selesai':
+                content = `<div class="${statusTextClass} bg-green-100 text-green-800">Perjalanan telah selesai. Terima kasih!</div>`;
+                break;
+        }
+        dom.charterSimControls.innerHTML = content;
+    };
+
 
     // --- Map & Geolocation ---
     const initializeMap = () => {
@@ -667,14 +717,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners Setup ---
     const setupEventListeners = () => {
         dom.appContainer.addEventListener('click', async (e) => {
-            const targetId = e.target.id;
-            const closest = (selector) => e.target.closest(selector);
+            const target = e.target;
+            const closest = (selector) => target.closest(selector);
 
             const serviceItem = closest('.service-item');
             const backBtn = closest('.back-btn');
             const navItem = closest('.nav-item');
             const doneBtn = closest('.done-btn');
             const viewTicketBtn = closest('.view-ticket-btn');
+            const payCharterBtn = closest('.pay-charter-btn');
 
             if (serviceItem) {
                 e.preventDefault();
@@ -692,10 +743,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const historyItem = historyData.find(item => item.id === viewTicketBtn.dataset.historyId);
                 if (historyItem) navigateTo('ticket-screen', historyItem);
             }
+            if (payCharterBtn) {
+                const orderId = payCharterBtn.dataset.historyId;
+                const order = historyData.find(item => item.id === orderId);
+                if (order) {
+                    appState.currentOrderForPayment = order;
+                    navigateTo('payment-screen');
+                }
+            }
+
 
             // Specific Buttons
-            switch(targetId) {
+            switch(target.id) {
                 case 'order-ticket-btn':
+                    appState.currentOrderForPayment = null; // Pastikan ini pembayaran reguler
                     navigateTo('payment-screen');
                     break;
                 case 'charter-entry-btn':
@@ -734,36 +795,48 @@ document.addEventListener('DOMContentLoaded', () => {
                             return;
                         }
                         
-                        const btn = e.target;
-                        btn.disabled = true;
+                        target.disabled = true;
                         showLoading(true);
-                        await delay(2000);
-
+                        
+                        const newCharterId = `charter${Date.now()}`;
                         const newCharter = {
-                            id: `charter${Date.now()}`,
+                            id: newCharterId,
                             type: 'charter',
                             ...appState.charterOrder,
                             date: new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
                             status: 'Menunggu Konfirmasi',
-                            fare: (Math.floor(Math.random() * 100) + 50) * 10000, // Random price
+                            fare: 0, // Harga akan ditentukan oleh admin
                             driver: "Menunggu Penugasan",
                             vehicle: "Menunggu Penugasan",
                         };
                         historyData.unshift(newCharter);
                         
-                        showLoading(false);
-                        btn.disabled = false;
-                        showToast("Permintaan charter berhasil diajukan!");
+                        showToast("Permintaan charter diajukan...");
                         navigateTo('history-screen');
+                        
+                        // --- Simulasi Admin Konfirmasi Harga ---
+                        setTimeout(() => {
+                             const order = historyData.find(c => c.id === newCharterId);
+                             if(order) {
+                                order.status = 'Menunggu Pembayaran';
+                                order.fare = (Math.floor(Math.random() * (150 - 50 + 1)) + 50) * 10000; // Harga acak antara 500rb - 1.5jt
+                                if(appState.currentScreen === 'history-screen') {
+                                    renderHistoryList();
+                                }
+                                showToast("Admin mengonfirmasi harga. Silakan bayar.");
+                             }
+                        }, 2000);
+
+                        showLoading(false);
+                        target.disabled = false;
                     }
                     break;
                 case 'download-ticket-btn':
                     {
-                        const ticketContent = document.getElementById('ticket-details');
-                        if (!ticketContent) return;
+                        if (!dom.ticketDetails) return;
                         showLoading(true);
                         await delay(200);
-                        html2canvas(ticketContent, { scale: 2, backgroundColor: null }).then(canvas => {
+                        html2canvas(dom.ticketDetails, { scale: 2, backgroundColor: null }).then(canvas => {
                             const link = document.createElement('a');
                             link.download = `e-tiket-bemo-${Date.now()}.png`;
                             link.href = canvas.toDataURL();
@@ -775,31 +848,84 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'confirm-payment-btn':
                     {
-                        const btn = e.target;
-                        btn.disabled = true;
-                        btn.innerHTML = `<span class="spinner !w-5 !h-5 !border-2"></span><span class="ml-2">Memproses...</span>`;
+                        target.disabled = true;
+                        target.innerHTML = `<span class="spinner !w-5 !h-5 !border-2"></span><span class="ml-2">Memproses...</span>`;
                         
                         await delay(1500); 
 
-                        const selectedRouteEl = dom.routeSelect;
-                        const routeName = selectedRouteEl.options[selectedRouteEl.selectedIndex].text;
-                        const newHistoryItem = {
-                            id: `hist${Date.now()}`,
-                            type: 'reguler',
-                            serviceName: appState.currentService.name,
-                            routeName: routeName,
-                            date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
-                            fare: appState.currentService.fare,
-                            status: 'Menunggu Keberangkatan'
-                        };
-                        historyData.unshift(newHistoryItem);
+                        // Cek apakah ini pembayaran charter atau reguler
+                        if (appState.currentOrderForPayment) {
+                            // Ini adalah pembayaran charter
+                            const order = historyData.find(item => item.id === appState.currentOrderForPayment.id);
+                            if (order) {
+                                showToast("Pembayaran charter berhasil!", 2000);
+                                order.status = 'Dikonfirmasi';
 
-                        navigateTo('ticket-screen', newHistoryItem);
+                                // --- Simulasi Admin Memberi Info Driver ---
+                                setTimeout(() => {
+                                    order.driver = "Ujang Supriadi";
+                                    order.vehicle = `Hiace D ${Math.floor(1000 + Math.random() * 9000)} UJP`;
+                                    showToast("Info driver & kendaraan diterima.", 2000);
+                                     if(appState.currentScreen === 'history-screen') renderHistoryList();
+
+                                    // --- Simulasi Driver Menjemput (2 menit -> diubah jadi 10 detik untuk demo) ---
+                                    setTimeout(() => {
+                                        if (order.status === 'Dikonfirmasi') { // Hanya jalan jika status belum berubah
+                                            order.status = 'Driver Menuju Lokasi';
+                                            showToast("Driver sedang dalam perjalanan menjemput Anda!", 4000);
+                                            if(appState.currentScreen === 'history-screen') renderHistoryList();
+                                            if(appState.currentScreen === 'ticket-screen') navigateTo('ticket-screen', order); // Refresh ticket screen if open
+                                        }
+                                    }, 10000); // 120000 ms = 2 menit
+                                }, 2000);
+                            }
+                            navigateTo('history-screen');
+                            appState.currentOrderForPayment = null; // Reset
+                        } else {
+                            // Ini pembayaran reguler
+                            const selectedRouteEl = dom.routeSelect;
+                            const routeName = selectedRouteEl.options[selectedRouteEl.selectedIndex].text;
+                            const newHistoryItem = {
+                                id: `hist${Date.now()}`,
+                                type: 'reguler',
+                                serviceName: appState.currentService.name,
+                                routeName: routeName,
+                                date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
+                                fare: appState.currentService.fare,
+                                status: 'Menunggu Keberangkatan'
+                            };
+                            historyData.unshift(newHistoryItem);
+                            navigateTo('ticket-screen', newHistoryItem);
+                        }
                         
-                        btn.disabled = false;
-                        btn.textContent = 'Saya Sudah Bayar';
+                        target.disabled = false;
+                        target.textContent = 'Saya Sudah Bayar';
                     }
                     break;
+                case 'simulate-scan-btn': {
+                    const orderId = target.dataset.id;
+                    const order = historyData.find(item => item.id === orderId);
+                    if (order) {
+                        order.status = 'Dalam Perjalanan';
+                        showToast("Penjemputan berhasil. Selamat menikmati perjalanan!");
+                        navigateTo('ticket-screen', order); // Refresh ticket view
+                        if (appState.previousScreen === 'history-screen') {
+                           renderHistoryList();
+                        }
+                    }
+                    break;
+                }
+                case 'simulate-finish-btn': {
+                    const orderId = target.dataset.id;
+                    const order = historyData.find(item => item.id === orderId);
+                    if (order) {
+                        order.status = 'Selesai';
+                        showToast("Perjalanan telah selesai. Terima kasih!");
+                        navigateTo('ticket-screen', order); // Refresh ticket view
+                        setTimeout(() => navigateTo('history-screen'), 2000);
+                    }
+                    break;
+                }
             }
         });
     };
